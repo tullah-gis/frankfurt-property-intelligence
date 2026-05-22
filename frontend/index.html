@@ -138,27 +138,33 @@ async function loadZones() {
       weight: 0.5,
     }),
     onEachFeature: (feature, layer) => {
-      layer.on("click", () => showInfo(feature.properties));
+      layer.on("click", (e) => showPopup(e.latlng, feature.properties));
       layer.on("mouseover", function() { this.setStyle({ weight: 2, color: "#f1c40f" }); });
       layer.on("mouseout", function() { zonesLayer.resetStyle(this); });
     }
   }).addTo(map);
 }
 
-function showInfo(p) {
-  const panel = document.getElementById("info-panel");
-  panel.classList.add("visible");
-  document.getElementById("info-title").textContent = p.ortsteil || "Zone " + p.zoneName;
-  document.getElementById("info-rows").innerHTML = `
-    <div class="info-row"><span class="info-key">Land Value</span><span class="info-val">${p.bodenrichtwert} €/m²</span></div>
-    <div class="info-row"><span class="info-key">Quality Index</span><span class="info-val">${p.quality_index}/100</span></div>
-    <div class="info-row"><span class="info-key">Supermarkets (500m)</span><span class="info-val">${p.poi_supermarket}</span></div>
-    <div class="info-row"><span class="info-key">Schools (500m)</span><span class="info-val">${p.poi_school}</span></div>
-    <div class="info-row"><span class="info-key">Kindergartens (500m)</span><span class="info-val">${p.poi_kindergarten}</span></div>
-    <div class="info-row"><span class="info-key">Parks (500m)</span><span class="info-val">${p.poi_park}</span></div>
-    <div class="info-row"><span class="info-key">Cafés (500m)</span><span class="info-val">${p.poi_cafe}</span></div>
-    <div class="info-row"><span class="info-key">Land Use</span><span class="info-val">${p.entwicklungszustand}</span></div>
-  `;
+function showPopup(latlng, p) {
+  L.popup({ maxWidth: 260 })
+    .setLatLng(latlng)
+    .setContent(`
+      <div style="font-family:sans-serif;font-size:12px;">
+        <b style="font-size:13px;color:#1e2a3a;">${p.ortsteil || "Zone " + p.zoneName}</b>
+        <hr style="margin:6px 0;border-color:#ddd;">
+        <table style="width:100%;border-collapse:collapse;">
+          <tr><td style="color:#666;padding:2px 0;">Land Value</td><td style="text-align:right;font-weight:700;">${p.bodenrichtwert} €/m²</td></tr>
+          <tr><td style="color:#666;padding:2px 0;">Quality Index</td><td style="text-align:right;font-weight:700;">${p.quality_index}/100</td></tr>
+          <tr><td style="color:#666;padding:2px 0;">Supermarkets (500m)</td><td style="text-align:right;font-weight:700;">${p.poi_supermarket}</td></tr>
+          <tr><td style="color:#666;padding:2px 0;">Schools (500m)</td><td style="text-align:right;font-weight:700;">${p.poi_school}</td></tr>
+          <tr><td style="color:#666;padding:2px 0;">Kindergartens (500m)</td><td style="text-align:right;font-weight:700;">${p.poi_kindergarten}</td></tr>
+          <tr><td style="color:#666;padding:2px 0;">Parks (500m)</td><td style="text-align:right;font-weight:700;">${p.poi_park}</td></tr>
+          <tr><td style="color:#666;padding:2px 0;">Cafés (500m)</td><td style="text-align:right;font-weight:700;">${p.poi_cafe}</td></tr>
+          <tr><td style="color:#666;padding:2px 0;">Land Use</td><td style="text-align:right;font-weight:700;">${p.entwicklungszustand}</td></tr>
+        </table>
+      </div>
+    `)
+    .openOn(map);
 }
 
 document.querySelectorAll(".layer-btn").forEach(btn => {
