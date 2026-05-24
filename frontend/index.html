@@ -143,11 +143,11 @@ function getColor(value, mode) {
     if (v > 0.2) return "#f46d43";
     return "#d73027";
   } else {
-    if (value > 5000) return "#1a9850";
-    if (value > 2000) return "#66bd63";
+    if (value > 5000) return "#d73027";
+    if (value > 2000) return "#f46d43";
     if (value > 1000) return "#fdae61";
-    if (value > 500)  return "#f46d43";
-    return "#d73027";
+    if (value > 500)  return "#66bd63";
+    return "#1a9850";
   }
 }
 
@@ -207,7 +207,7 @@ document.querySelectorAll(".layer-btn").forEach(btn => {
     document.getElementById("legend-title").textContent =
       currentMode === "quality"
         ? "Quality Index (0 = low, 100 = high)"
-        : "Land Value (€/m²) — green = high, red = low";
+        : "Land Value (€/m²) — green = affordable, red = expensive";
     loadZones();
   });
 });
