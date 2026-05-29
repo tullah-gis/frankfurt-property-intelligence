@@ -10,7 +10,7 @@ from io import BytesIO
 from backend.database import engine
 
 WFS_URL = "https://www.geoportal.hessen.de/mapbender/php/wfs.php?INSPIRE=1&FEATURETYPE_ID=5721&SERVICE=WFS&VERSION=2.0.0"
-FRANKFURT_BBOX = (461000, 5541000, 498000, 5570000)  # UTM 25832
+FRANKFURT_BBOX = (461000, 5541000, 498000, 5584000)  # UTM 25832
 
 def load_bodenrichtwerte():
     print("[1/3] Lade Bodenrichtwerte vom WFS Hessen ...")

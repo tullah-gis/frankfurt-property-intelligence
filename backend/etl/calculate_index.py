@@ -21,7 +21,7 @@ RADIUS = 500  # Meter
 def calculate_index():
     print("[1/4] Lade Bodenrichtwerte aus Supabase ...")
     brw = gpd.read_postgis(
-        "SELECT * FROM bodenrichtwerte WHERE entwicklungszustand = 'B'",
+        "SELECT * FROM bodenrichtwerte",
         con=engine,
         geom_col="geometry"
     )
