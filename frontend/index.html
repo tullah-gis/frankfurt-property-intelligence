@@ -111,7 +111,7 @@
 
   <div>
     <h2>Export</h2>
-    <a href="https://frankfurt-property-intelligence.onrender.com/api/export/geojson" download style="display:block;padding:12px 16px;background:#f1c40f;border:1px solid #f1c40f;color:#1e2a3a;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;text-align:center;">⬇ Download GeoJSON</a>
+    <a href="/api/export/geojson" download style="display:block;padding:12px 16px;background:#f1c40f;border:1px solid #f1c40f;color:#1e2a3a;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;text-align:center;">⬇ Download GeoJSON</a>
   </div>
 
   <div id="info-panel" class="info-panel">
@@ -124,7 +124,7 @@
 <div id="map"></div>
 
 <script>
-const API = "https://frankfurt-property-intelligence.onrender.com/api";
+const API = "/api";
 
 const map = L.map("map", { center: [50.1109, 8.6821], zoom: 12 });
 L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {

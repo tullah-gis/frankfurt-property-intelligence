@@ -21,11 +21,11 @@ RADIUS = 500  # Meter
 def calculate_index():
     print("[1/4] Lade Bodenrichtwerte aus Supabase ...")
     brw = gpd.read_postgis(
-        "SELECT * FROM bodenrichtwerte",
+        "SELECT * FROM bodenrichtwerte WHERE art = 'W'",
         con=engine,
         geom_col="geometry"
     )
-    print(f"      → {len(brw)} Bauland-Zonen")
+    print(f"      → {len(brw)} Wohnzonen")
 
     print("[2/4] Lade POIs aus Supabase ...")
     pois = gpd.read_postgis(
