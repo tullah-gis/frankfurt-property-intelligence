@@ -1,3 +1,13 @@
+---
+title: Frankfurt Property Intelligence
+emoji: 🏙️
+colorFrom: green
+colorTo: red
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # Frankfurt Property Intelligence
 
 An interactive geospatial web application that combines official land value data (Bodenrichtwerte) with a POI-based quality of life index to support real estate decision-making in Frankfurt am Main.
