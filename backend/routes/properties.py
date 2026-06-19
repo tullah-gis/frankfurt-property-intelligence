@@ -61,7 +61,7 @@ def get_stats(db: Session = Depends(get_db)):
             MIN(bodenrichtwert) as min_brw,
             ROUND(AVG(quality_index)::numeric, 1) as avg_quality
         FROM bodenrichtwerte_index
-        WHERE art = 'W'
+        WHERE art IN ('W', 'M', 'SG')
     """)
     row = db.execute(sql).fetchone()
     return {
@@ -121,7 +121,7 @@ def export_geojson(db: Session = Depends(get_db)):
             )
         ) AS geojson
         FROM bodenrichtwerte_index
-        WHERE art = 'W'
+        WHERE art IN ('W', 'M', 'SG')
     """)
     result = db.execute(sql).fetchone()
     return Response(
