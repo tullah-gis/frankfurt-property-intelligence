@@ -15,7 +15,7 @@ def get_zones(entwicklungszustand: str = None, db: Session = Depends(get_db)):
                    poi_supermarket, poi_school, poi_kindergarten, poi_park, poi_cafe,
                    ST_AsGeoJSON(geometry)::json AS geometry
             FROM bodenrichtwerte_index
-            WHERE art = 'W' AND entwicklungszustand = :ez
+            WHERE art IN ('W', 'M', 'SG') AND entwicklungszustand = :ez
         """)
         rows = db.execute(sql, {"ez": entwicklungszustand}).fetchall()
     else:
@@ -25,7 +25,7 @@ def get_zones(entwicklungszustand: str = None, db: Session = Depends(get_db)):
                    poi_supermarket, poi_school, poi_kindergarten, poi_park, poi_cafe,
                    ST_AsGeoJSON(geometry)::json AS geometry
             FROM bodenrichtwerte_index
-            WHERE art = 'W'
+            WHERE art IN ('W', 'M', 'SG')
         """)
         rows = db.execute(sql).fetchall()
 
